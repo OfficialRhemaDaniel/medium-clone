@@ -31,7 +31,7 @@ export class UsersService {
     }
     const newUser = new UserEntity();
     Object.assign(newUser, createUserDto);
-    console.log('newUser', newUser);
+    // console.log('newUser', newUser);
     return await this.userRepository.save(newUser);
   }
 
@@ -55,6 +55,10 @@ export class UsersService {
         token: this.generateJwt(user),
       },
     };
+  }
+
+  async findbyId(id: number): Promise<UserEntity | null> {
+    return this.userRepository.findOne({ where: { id } });
   }
 
   async login(LoginUserDto: LoginUserDto): Promise<UserEntity> {
